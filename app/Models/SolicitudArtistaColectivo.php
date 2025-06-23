@@ -12,6 +12,7 @@ class SolicitudArtistaColectivo extends Model
     protected $table = 'solicitud_artista_colectivos';
 
     protected $fillable = [
+        'user_id',
         'departamento',
         'provincia',
         'municipio',
@@ -32,6 +33,7 @@ class SolicitudArtistaColectivo extends Model
         'cv',
         'carta',
         'representante',
+        'estado'
     ];
 
     protected $casts = [
@@ -58,5 +60,9 @@ class SolicitudArtistaColectivo extends Model
 
         // O si el representante está en la misma tabla, pero con prefijo, puedes usar:
         // return $this->hasOne(Representante::class, 'solicitud_id');
+    }
+        public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

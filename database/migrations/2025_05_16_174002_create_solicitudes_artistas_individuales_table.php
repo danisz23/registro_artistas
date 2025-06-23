@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('ci_pdf');
             $table->string('cv');
             $table->enum('estado', ['pendiente', 'aprobado', 'rechazado'])->default('pendiente');
+            $table->foreignId('user_id')->constrained()->onDelete('restrict');
 
             $table->timestamps();
         });
@@ -48,5 +49,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('solicitudes_artistas_individuales');
+        Schema::table('solicitudes_artistas_individuales', function (Blueprint $table) {
+        $table->dropForeign(['user_id']);
+        $table->dropColumn('user_id');
+    });
     }
 };

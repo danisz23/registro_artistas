@@ -21,8 +21,28 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Agregar aquí
     ];
+// Métodos de ayuda para roles
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
 
+    public function isRegionalAdmin(): bool
+    {
+        return $this->role === 'regional_admin';
+    }
+
+    public function isArtistIndividual(): bool
+    {
+        return $this->role === 'artist_individual';
+    }
+
+    public function isArtistColectivo(): bool
+    {
+        return $this->role === 'artist_colectivo';
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -44,5 +64,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function solicitudIndividual()
+    {
+        return $this->hasOne(SolicitudArtistaIndividual::class);
+    }
+
+    public function artistaIndividual()
+    {
+        return $this->hasOne(ArtistaIndividual::class);
     }
 }

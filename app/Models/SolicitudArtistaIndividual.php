@@ -11,6 +11,7 @@ class SolicitudArtistaIndividual extends Model
 
     protected $table = 'solicitudes_artistas_individuales';
         protected $fillable = [
+        'user_id',
         'departamento', 'provincia', 'municipio', 'comunidad', 'domicilio',
         'ci', 'expedido', 'sexo', 'nombres', 'apellidos', 'lugar_nacimiento',
         'fecha_nacimiento', 'telefono', 'celular', 'correo', 'antecedentes',
@@ -26,5 +27,9 @@ class SolicitudArtistaIndividual extends Model
     public function subcategoria()
     {
         return $this->belongsTo(Subcategoria::class, 'sub_categoria_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

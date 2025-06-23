@@ -9,6 +9,7 @@ use App\Http\Controllers\ArtistaIndividualController;
 use App\Http\Controllers\ArtistaColectivoController;
 use App\Http\Controllers\SolicitudColectivoController;
 use App\Http\Controllers\SolicitudArtistaIndividualController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::get('/subcategorias/{categoriaId}', [ArtistaColectivoController::class, '
 Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     
     // Panel de administración (dashboard)
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/estadisticas', [DashboardController::class, 'verEstadisticas'])->name('estadisticas'); // Vista
+    Route::get('/estadisticas/datos', [DashboardController::class, 'estadisticas'])->name('estadisticas.datos'); // JSON
 
     // CRUD de usuarios
     Route::resource('users', UserController::class);
@@ -56,6 +59,8 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         // Rechazar una solicitud
         Route::post('solicitudes/rechazar/{id}', [SolicitudColectivoController::class, 'rechazar'])->name('solicitudes.rechazar');
     });
+
+    // Rutas para gestionar solicitudes de artistas individuales (antes del resource)
     Route::prefix('artistas_individuales')->name('artistas_individuales.')->group(function () {
         // Listado de solicitudes pendientes
         Route::get('solicitudes', [SolicitudArtistaIndividualController::class, 'index'])->name('solicitudes.index');
@@ -69,6 +74,10 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         // Rechazar una solicitud
         Route::post('solicitudes/rechazar/{id}', [SolicitudArtistaIndividualController::class, 'rechazar'])->name('solicitudes.rechazar');
     });
+
+    // Ruta para mostrar perfil de artista individual (vista IndividualAr)
+    Route::get('artistas_individuales/perfil', [ArtistaIndividualController::class, 'perfil'])->name('artistas_individuales.perfil');
+
     // CRUD de artistas individuales
     Route::get('artistas_individuales/{id}/formulario', [ArtistaIndividualController::class, 'show_f'])->name('artistas_individuales.formulario');
     Route::get('artistas_individuales/{id}/credencial', [ArtistaIndividualController::class, 'mostrarCredencial'])->name('artistas_individuales.credencial');
@@ -79,4 +88,3 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::get('artistas_colectivos/{id}/credencial', [ArtistaColectivoController::class, 'mostrarCredencial'])->name('artistas_colectivos.credencial');
     Route::resource('artistas_colectivos', ArtistaColectivoController::class);
 });
-

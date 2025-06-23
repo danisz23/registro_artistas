@@ -12,11 +12,12 @@ class ArtistaIndividual extends Model
     protected $table = 'artistas_individuales';
 
     protected $fillable = [
+        'user_id',
         'departamento', 'provincia', 'municipio', 'comunidad', 'domicilio',
         'ci', 'expedido', 'sexo', 'nombres', 'apellidos', 'lugar_nacimiento', 
         'fecha_nacimiento', 'telefono', 'celular', 'correo', 'antecedentes',
         'categoria_id', 'sub_categoria_id', 'especialidad1', 'biografia', 
-        'fotografia', 'ci_pdf', 'cv',
+        'fotografia', 'ci_pdf', 'cv', 'estado' 
     ];
         // Relación con la tabla 'Categoria'
         public function categoria()
@@ -46,5 +47,13 @@ class ArtistaIndividual extends Model
         public function getCvUrlAttribute()
         {
             return asset('storage/' . $this->cv);
+        }
+        public function solicitud()
+        {
+            return $this->hasOne(Solicitud::class); // O belongsTo si la tabla de solicitud contiene el artista_id
+        }
+        public function user()
+        {
+            return $this->belongsTo(User::class);
         }
 }

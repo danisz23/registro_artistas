@@ -34,7 +34,7 @@ return new class extends Migration
         $table->string('carta');
         $table->json('representante'); // Para guardar los datos como un JSON
         $table->enum('estado', ['pendiente', 'aprobado', 'rechazado'])->default('pendiente');
-
+        $table->foreignId('user_id')->constrained()->onDelete('restrict');
         $table->timestamps();
     });
 }

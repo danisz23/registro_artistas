@@ -52,15 +52,15 @@
         </ul>
     </nav>
 
-    <!-- Sidebar -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand -->
-        <a href="{{ route('admin.dashboard') }}" class="brand-link">
-            <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
-        </a>
+   <!-- Sidebar -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand -->
+    <a href="#" class="brand-link">
+        <span class="brand-text font-weight-light">{{ config('app.name', 'Registro de Artistas') }}</span>
+    </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar">
             <!-- Usuario -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
@@ -72,14 +72,21 @@
             </div>
 
             <!-- Menú -->
+            @php
+                $role = Auth::user()->role;
+            @endphp
+ 
+            @if(!in_array($role, ['artist_individual', 'artist_colectivo']))
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+
                     <li class="nav-item">
                         <a href="{{ route('admin.dashboard') }}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
@@ -136,10 +143,13 @@
                             </li>
                         </ul>
                     </li>
+
                 </ul>
             </nav>
+            @endif
         </div>
-    </aside>
+</aside>
+
 
     <!-- Contenido principal -->
     <div class="content-wrapper">

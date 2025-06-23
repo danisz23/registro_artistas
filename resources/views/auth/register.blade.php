@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Museo Nacional de Arte</title>
+    <title>Registro de Artistas</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
@@ -76,7 +76,22 @@
                     <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Confirme su contraseña" class="bg-transparent outline-none w-full text-[#F0F0F0] placeholder-[#B6B6B6]">
                 </div>
             </div>
-
+            <div>
+                <label class="text-[#F0F0F0]" for="role">Tipo de Registro</label>
+                <div class="flex items-center border-b border-[#C9B29B] py-2">
+                    <i class="fas fa-user-tag text-[#C9B29B] mr-3"></i>
+                    <select id="role" name="role" required class="bg-transparent outline-none w-full text-[#F0F0F0] placeholder-[#B6B6B6]">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="artist_individual">Artista Individual</option>
+                        <option value="artist_colectivo">Artista Colectivo</option>
+                    </select>
+                </div>
+                @error('role')
+                    <span class="invalid-feedback text-red-500 text-sm" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <!-- Botón de registro -->
             <button type="submit" class="mt-6 bg-black hover:bg-gray-800 transition text-white font-bold py-2 rounded-full">
                 Registrarse

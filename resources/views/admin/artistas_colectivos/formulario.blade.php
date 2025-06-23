@@ -13,7 +13,7 @@
             <td align="center">
                 <table border="0" align="center">
                     <tr>
-                        <td align="center"><strong>REGISTRO INDIVIDUAL</strong></td>
+                        <td align="center"><strong>REGISTRO COLECTIVO</strong></td>
                     </tr>
                     <tr>
                         <td>
@@ -29,7 +29,7 @@
                                     </td>
                                     <td align="left">
                                         <strong>Representante:</strong> {{ $artista->representante->nombres }} {{ $artista->representante->apellidos }}<br>
-                                        <strong>C.I.:</strong> {{ $artista->ci }}<br>
+                                        <strong>C.I.:</strong> {{ $artista->representante->ci }}<br>
                                         <strong>Lugar de Nacimiento:</strong> {{ $artista->lugar_nacimiento }} el {{ \Carbon\Carbon::parse($artista->fecha_nacimiento)->format('d/m/Y') }}<br>
                                         <strong>Domicilio:</strong> {{ $artista->domicilio }}<br>
                                         <strong>Teléfono/Celular:</strong> {{ $artista->telefono }}<br>
@@ -47,8 +47,8 @@
                             <table width="700" border="1">
                                 <tr>
                                     <td>
-                                        <strong>Categoría:</strong> {{ $artista->categoria }} &nbsp;
-                                        <strong>Sub-Categoría:</strong> {{ $artista->subcategoria }} &nbsp;
+                                        <strong>Categoría:</strong> {{ $artista->categoria->nombre}} &nbsp;
+                                        <strong>Sub-Categoría:</strong> {{ $artista->subcategoria->nombre }} &nbsp;
                                         <strong>Especialidad:</strong> {{ $artista->especialidad }}
                                     </td>
                                 </tr>

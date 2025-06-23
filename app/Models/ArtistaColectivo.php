@@ -13,12 +13,13 @@ class ArtistaColectivo extends Model
     protected $table = 'artistas_colectivos';
 
     protected $fillable = [
+        'user_id', 
         'departamento', 'provincia', 'municipio', 'comunidad',
         'nombre_denominacion', 'integrantes', 'periodo_act',
         'telefono', 'celular', 'correo',
         'categoria_id', 'sub_categoria_id', 'especialidad1',
         'antecedentes_grupo', 'trayectoria',
-        'representante_id', 'logo', 'ci_representante', 'cv', 'carta', 'estado' ,
+        'representante_id', 'logo', 'ci_representante', 'cv', 'carta', 'estado' 
     ];
 
     public function representante()
